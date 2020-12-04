@@ -1,0 +1,35 @@
+name: biometric_package
+description: A new Flutter package project.
+version: 0.0.2+3
+author:
+
+environment:
+  sdk: ">=2.10.0 <3.0.0"
+  flutter: ">=1.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  bloc: ^6.1.0
+  enum_to_string: ^1.0.13
+  equatable: ^1.2.5
+  flutter_bloc: ^6.1.0
+  flutter_modular: ^2.0.1
+  local_auth: ^0.6.3+4
+  shared_preferences: ^0.5.12+4
+  timed_wheel_widget:
+    path: "../timed_wheel_widget"
+
+analyzer:
+  enable-experiment:
+    - non-nullable
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  bloc_test: ^7.1.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - images/
