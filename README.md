@@ -103,7 +103,7 @@ class TimeoutState extends BiometricSensorState {
 }
 ```
 
-### BLoC
+## BLoC
 
 The 'Business LOgic Component'(BLoC) is managed by the BiometicCubit. This can be customised to fit the tasks associated with different authentication packages. The design uses [pub.dev local_auth](https://pub.dev/packages/local_auth) to handle events, and host memories that will generate **State**.
 
@@ -126,7 +126,7 @@ void setSensorEnabled({@required BiometricSensorType sensor, @required bool enab
 void setup({@required Duration timeout}) async {}
 ```
 
-### Repository
+## Repository
 
 To abstract from a specific biometric package (say: local\_auth), a **Repository** design is used: [biometric_repository.dart](https://github.com/GitHubStuff/biometric_package/blob/main/lib/repository/biometric_respository.dart) shows the kinds of reply from the biometric layer:
 
@@ -140,7 +140,36 @@ To abstract from a specific biometric package (say: local\_auth), a **Repository
 
 The repo [local_biometric_respository.dart](https://github.com/GitHubStuff/biometric_package/blob/main/lib/repository/local_biometric_repository.dart) implements **biometric_repository** and is uses [pub.dev local_auth](https://pub.dev/packages/local_auth) to communitate with a biometric device.
 
-### Usage
+## Usage
 
-The example [example.dart]()
+The example [example.dart](https://github.com/GitHubStuff/biometric_package/blob/main/biometric_example/lib/example.dart) has the minimal implementation, as far as showing **STATE**. 
 
+NOTE:
+
+```dart
+BiometricBuilderState.BiometricallyAuthenticated
+BiometricBuilderState.EnableSensorState:
+```
+
+When these states are emitted a call backback to _cubit.reportDuration(delayDuration:) for periodic updates on how long a user has been authenticated *AND* enforce **Timeout** event/state.
+
+## EXTRAS
+
+Widget that displays a slide switch and controls the enable/disable of a sensor
+
+```dart
+class SensorWidget extends StatelessWidget {
+  final BiometricCubit biometricCubit;
+  final BiometricSensorType sensor;
+  final Widget trueCaption;
+  final Widget falseCaption;
+  final double iconSize;
+  const SensorWidget({
+    Key key,
+    @required this.biometricCubit,
+    @required this.sensor,
+    @required this.trueCaption,
+    @required this.falseCaption,
+    this.iconSize = 32.0,
+  })
+```

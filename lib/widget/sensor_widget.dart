@@ -7,20 +7,26 @@ import 'package:flutter/material.dart';
 import '../cubit/biometric_sensor_cubit.dart';
 import '../sensor_types/biometric_sensor.dart';
 
+/// Helper widget that displays a [slide-switch] for enable/disable [sensor state]
+
 class SensorWidget extends StatelessWidget {
   final BiometricCubit biometricCubit;
   final BiometricSensorType sensor;
   final Widget trueCaption;
   final Widget falseCaption;
+  final double iconSize;
   const SensorWidget({
+    Key key,
     @required this.biometricCubit,
     @required this.sensor,
     @required this.trueCaption,
     @required this.falseCaption,
+    this.iconSize = 32.0,
   })  : assert(biometricCubit != null),
         assert(sensor != null),
         assert(trueCaption != null),
-        assert(falseCaption != null);
+        assert(falseCaption != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +35,7 @@ class SensorWidget extends StatelessWidget {
       title: currentState ? trueCaption : falseCaption,
       value: currentState,
       onChanged: (value) => biometricCubit.setSensorEnabled(enabled: value, sensor: sensor),
-      secondary: sensor.imageIcon(size: 32.0),
+      secondary: sensor.imageIcon(size: iconSize ?? 32.0),
     );
     return Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
