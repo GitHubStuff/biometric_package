@@ -2,6 +2,7 @@
 // Uses of this source code is governed by 'The Unlicense' that can be
 // found in the LICENSE file.
 
+import '../preferences/most_recent_authencation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/auth_strings.dart';
@@ -30,13 +31,14 @@ class LocalBiometricRepository implements BiometricRespository {
 
   Future<BiometricRespositoryResponse<bool>> authentication(BiometricSensorType sensor) async {
     try {
-      final authenticated = await _localAuthentication.authenticateWithBiometrics(
+      final bool authenticated = await _localAuthentication.authenticateWithBiometrics(
         localizedReason: fingerPrintPrompt,
         iOSAuthStrings: iosAuthMessages,
         androidAuthStrings: androidAuthMessages,
         useErrorDialogs: true,
         stickyAuth: true,
       );
+      if (authenticated) MostRecentAuthenication.set(DateTime.now());
       return BiometricRespositoryResponse<bool>.authentication(authenticated);
     } on PlatformError catch (err) {
       throw BiometricRespositoryResponse.error(err);
@@ -45,12 +47,15 @@ class LocalBiometricRepository implements BiometricRespository {
         case auth_error.lockedOut:
           return BiometricRespositoryResponse.exception(BiometricException.lockedOut);
         case auth_error.notAvailable:
+          MostRecentAuthenication.set(null);
           return BiometricRespositoryResponse.exception(BiometricException.notAvailable);
         case auth_error.notEnrolled:
+          MostRecentAuthenication.set(null);
           return BiometricRespositoryResponse.exception(BiometricException.notEnrolled);
         case auth_error.otherOperatingSystem:
           return BiometricRespositoryResponse.exception(BiometricException.otherOperatingSystem);
         case auth_error.passcodeNotSet:
+          MostRecentAuthenication.set(null);
           return BiometricRespositoryResponse.exception(BiometricException.passcodeNotSet);
         case auth_error.permanentlyLockedOut:
           return BiometricRespositoryResponse.exception(BiometricException.permanentlyLockedOut);
