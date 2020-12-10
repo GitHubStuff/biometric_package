@@ -37,9 +37,6 @@ class SensorWidget extends StatelessWidget {
       onChanged: (value) => biometricCubit.setSensorEnabled(enabled: value, sensor: sensor),
       secondary: sensor.imageIcon(size: iconSize ?? 32.0),
     );
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
-      child: toggleSwitch,
-    );
+    return toggleSwitch;
   }
 }

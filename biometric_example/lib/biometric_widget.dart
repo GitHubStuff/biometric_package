@@ -1,6 +1,7 @@
 import 'package:biometric_package/biometric_package.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:theme_package/theme_package.dart';
 import 'package:timed_wheel_widget/timed_wheel_widget.dart';
 
 const Duration defaultAuthenticationDuration = const Duration(minutes: 1);

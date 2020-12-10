@@ -155,7 +155,7 @@ When these states are emitted a call backback to _cubit.reportDuration(delayDura
 
 ## EXTRAS
 
-Widget that displays a slide switch and controls the enable/disable of a sensor
+* Widget that displays a slide switch and controls the enable/disable of a sensor
 
 ```dart
 class SensorWidget extends StatelessWidget {
@@ -173,3 +173,11 @@ class SensorWidget extends StatelessWidget {
     this.iconSize = 32.0,
   })
 ```
+
+* Test if user has ever been authenticated using biometrics (returns null if never authenticated)
+
+```dart
+  final DateTime lastAuthorization = await MostRecentAuthentication.get();
+```
+
+

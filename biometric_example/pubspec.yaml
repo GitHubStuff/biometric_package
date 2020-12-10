@@ -23,6 +23,8 @@ dependencies:
   enum_to_string: ^1.0.13
   timed_wheel_widget:
     path: "../../timed_wheel_widget"
+  theme_package:
+    path: "../../theme_package"
 
 dev_dependencies:
   flutter_test:

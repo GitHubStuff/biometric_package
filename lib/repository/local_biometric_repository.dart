@@ -2,7 +2,7 @@
 // Uses of this source code is governed by 'The Unlicense' that can be
 // found in the LICENSE file.
 
-import '../preferences/most_recent_authencation.dart';
+import '../preferences/most_recent_authenication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/auth_strings.dart';
