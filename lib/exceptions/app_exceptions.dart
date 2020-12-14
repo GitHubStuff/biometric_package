@@ -2,16 +2,7 @@
 // Uses of this source code is governed by 'The Unlicense' that can be
 // found in the LICENSE file.
 
-class AppException implements Exception {
-  final message;
-  final prefix;
-  final code;
-  AppException([this.message, this.prefix, this.code]);
-
-  String toString() {
-    return '{"$prefix" : $message", "code":$code}';
-  }
-}
+import 'package:theme_package/theme_package.dart';
 
 class BiometricPlatformException extends AppException {
   BiometricPlatformException([String message, int code]) : super(message, 'Device Platform exception', code);

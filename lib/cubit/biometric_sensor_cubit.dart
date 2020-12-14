@@ -5,8 +5,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:theme_package/theme_package.dart';
 
-import '../exceptions/app_exceptions.dart';
 import '../exceptions/biometric_exception.dart';
 import '../preferences/authentication_time.dart';
 import '../preferences/lockout_time.dart';

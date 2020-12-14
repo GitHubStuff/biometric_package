@@ -1,11 +1,11 @@
 name: biometric_package
-description: A new Flutter package project.
-version: 0.0.2+3
+description: An package that applies BLoC for biometric authentication
+version: 0.0.3+0
 author:
 
 environment:
   sdk: ">=2.10.4 <3.0.0"
-  flutter: ">=1.22.4"
+  flutter: ">=1.22.5"
 
 dependencies:
   flutter:
@@ -19,6 +19,8 @@ dependencies:
   shared_preferences: ^0.5.12+4
   timed_wheel_widget:
     path: "../timed_wheel_widget"
+  theme_package:
+    path: "../theme_package"
 
 analyzer:
   enable-experiment:
