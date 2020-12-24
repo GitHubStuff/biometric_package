@@ -26,14 +26,13 @@ class _ExampleWidget extends ObservingStatefulWidget<ExampleWidget> {
   }
 
   @override
-  void afterFirstLayout(BuildContext context) {}
+  void afterFirstLayoutComplete(BuildContext context) {}
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BiometricSensorCubit, BiometricSensorState>(
         cubit: _biometricSensorCubit,
         builder: (context, sensorState) {
-          debugPrint('sensorState: $sensorState');
           switch (sensorState.biometricSensorState) {
             case BiometricBuilderState.AuthenticatedState:
               final duration = (sensorState as AuthenticatedState).duration;

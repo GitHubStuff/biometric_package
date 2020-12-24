@@ -34,7 +34,6 @@ void main() {
   MockAvailableSensors mockBiometricRepo;
 
   setUp(() {
-    debugPrint('Setup: ${DateTime.now().toLocal()}');
     mockBiometricRepo = MockAvailableSensors();
     biometricSensorCubit = BiometricSensorCubit(
       biometricRespository: mockBiometricRepo,
@@ -82,32 +81,4 @@ void main() {
     biometricSensorCubit.setup(timeout: Duration());
     expectLater(biometricSensorCubit, emitsInOrder(expectedResponse));
   });
-
-  //test('adds one to input values', () {
-  // final widget = BlocBuilder<BiometricSensorCubit, BiometricSensorState>(
-  //     cubit: biometricSensorCubit,
-  //     builder: (context, sensorState) {
-  //       debugPrint('sensorState: $sensorState');
-  //       switch (sensorState.biometricSensorState) {
-  //         case BiometricBuilderState.AuthenticatedState:
-  //         case BiometricBuilderState.AvailabilityState:
-  //         case BiometricBuilderState.CancelState:
-  //         case BiometricBuilderState.EnableSensorState:
-  //         case BiometricBuilderState.ExceptionState:
-  //           break;
-  //         case BiometricBuilderState.InitialState:
-  //           return CircularProgressIndicator(key: Key("CPI"));
-  //         case BiometricBuilderState.NoBiometricsState:
-  //         case BiometricBuilderState.PlatformError:
-  //         case BiometricBuilderState.TimeoutState:
-  //       }
-  //       return Text('Unhandled state ${sensorState.biometricSensorState}');
-  //     });
-  // expect(widget.key, Key("CPI"));
-  // final calculator = Calculator();
-  // expect(calculator.addOne(2), 3);
-  // expect(calculator.addOne(-7), -6);
-  // expect(calculator.addOne(0), 1);
-  // expect(() => calculator.addOne(null), throwsNoSuchMethodError);
-  //});
 }

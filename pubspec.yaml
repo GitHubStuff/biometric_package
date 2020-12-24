@@ -1,6 +1,6 @@
 name: biometric_package
 description: An package that applies BLoC for biometric authentication
-version: 0.0.3+0
+version: 0.0.3+1
 author:
 
 environment:
@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   bloc: ^6.1.0
-  enum_to_string: ^1.0.13
+  enum_to_string: ^1.0.14
   equatable: ^1.2.5
   flutter_bloc: ^6.1.0
   flutter_modular: ^2.0.1

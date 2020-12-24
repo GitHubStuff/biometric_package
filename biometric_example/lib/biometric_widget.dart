@@ -30,25 +30,13 @@ class _BiometricWidget extends ObservingStatefulWidget<BiometricWidget> {
   }
 
   @override
-  void afterFirstLayout(BuildContext context) {}
+  void afterFirstLayoutComplete(BuildContext context) {}
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BiometricSensorCubit, BiometricSensorState>(
         cubit: _biometricSensorCubit,
         builder: (context, sensorState) {
-          debugPrint('sensorState: $sensorState');
-          // BiometricSensorType.fingerprint.getEnabledState().then((state) async {
-          //   debugPrint('STATE:$state');
-          //   await BiometricSensorType.fingerprint.setEnabledState(!state);
-          //   final b = await BiometricSensorType.fingerprint.getEnabledState();
-          //   debugPrint('New State: $b');
-          // });
-          // return TimedWheelWidget(
-          //   callback: (pct, duration) => debugPrint('callback:$pct $duration'),
-          //   completion: () => debugPrint('Done'),
-          //   duration: Duration(seconds: 15),
-          // );
           Widget message = Text('Unhandled state ${sensorState.biometricSensorState}');
           _displayWidgets = List();
           _displayWidgets.add(_loginWidget());
@@ -69,7 +57,7 @@ class _BiometricWidget extends ObservingStatefulWidget<BiometricWidget> {
               }
               break;
             case BiometricBuilderState.BiometricallyAuthenticated:
-              debugPrint('BiometricBuilderState.BiometricallyAuthenticated');
+              Log.V('BiometricBuilderState.BiometricallyAuthenticated');
               _timedWheelWidget = TimedWheelWidget(
                 completion: () {},
                 duration: defaultAuthenticationDuration,
