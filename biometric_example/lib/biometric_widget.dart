@@ -83,6 +83,7 @@ class _BiometricWidget extends ObservingStatefulWidget<BiometricWidget> {
               break;
             case BiometricBuilderState.InitialState:
               _biometricSensorCubit.setup(timeout: defaultAuthenticationDuration);
+              return Container(height: 48);
               return CircularProgressIndicator();
             case BiometricBuilderState.LockedoutState:
             case BiometricBuilderState.NoBiometricsState:

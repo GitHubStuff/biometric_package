@@ -3,26 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:theme_package/theme_package.dart';
 
+///
+/// [TEMPLATE] for creating a biometric widget for the an [App Widget Tree]
+///
+
 const Duration defaultAuthenticationDuration = const Duration(minutes: 1);
 
 class ExampleWidget extends StatefulWidget {
-  final BiometricRespository biometricRespository;
-  ExampleWidget(this.biometricRespository);
+  final BiometricSensorCubit biometricSensorCubit;
+  ExampleWidget(this.biometricSensorCubit);
 
   _ExampleWidget createState() => _ExampleWidget();
 }
 
 class _ExampleWidget extends ObservingStatefulWidget<ExampleWidget> {
-  BiometricSensorCubit _biometricSensorCubit;
-
   @override
   void initState() {
     super.initState();
-    _biometricSensorCubit = BiometricSensorCubit(
-      biometricRespository: widget.biometricRespository,
-      lockedOutDuration: Duration(seconds: 45),
-      permLockoutDuration: Duration(minutes: 5),
-    );
   }
 
   @override
@@ -31,7 +28,7 @@ class _ExampleWidget extends ObservingStatefulWidget<ExampleWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BiometricSensorCubit, BiometricSensorState>(
-        cubit: _biometricSensorCubit,
+        cubit: widget.biometricSensorCubit,
         builder: (context, sensorState) {
           switch (sensorState.biometricSensorState) {
             case BiometricBuilderState.AuthenticatedState:
@@ -40,18 +37,18 @@ class _ExampleWidget extends ObservingStatefulWidget<ExampleWidget> {
                 //Not authenticated
               } else {
                 // Report authentication duration every 1/2 second (good interval if using animation indicator)
-                _biometricSensorCubit.reportDuration(delayDuration: Duration(milliseconds: 500));
+                widget.biometricSensorCubit.reportDuration(delayDuration: Duration(milliseconds: 500));
               }
               break;
             case BiometricBuilderState.BiometricallyAuthenticated:
               // Device authenticated user
               // Report authentication duration every 1/2 second (good interval if using animation indicator)
-              _biometricSensorCubit.reportDuration(delayDuration: Duration(milliseconds: 500));
+              widget.biometricSensorCubit.reportDuration(delayDuration: Duration(milliseconds: 500));
               break;
             case BiometricBuilderState.EnableSensorState:
               final stateInfo = (sensorState as EnableSensorState);
               // If a sensor is enabled - try to authenticate with it
-              if (stateInfo.enabled) _biometricSensorCubit.sensorAuthenticate(usingSensor: stateInfo.sensor);
+              if (stateInfo.enabled) widget.biometricSensorCubit.sensorAuthenticate(usingSensor: stateInfo.sensor);
               break;
 
             case BiometricBuilderState.AvailabilityState:
@@ -67,7 +64,7 @@ class _ExampleWidget extends ObservingStatefulWidget<ExampleWidget> {
             case BiometricBuilderState.InitialState:
               // CRITICAL: This must be done
               // NOTE: Initial widget state - call setup of cubit with Duration of an authenticated session
-              _biometricSensorCubit.setup(timeout: defaultAuthenticationDuration);
+              widget.biometricSensorCubit.setup(timeout: defaultAuthenticationDuration);
               return CircularProgressIndicator();
             case BiometricBuilderState.LockedoutState:
               // The device reported a lockout (short or perm)

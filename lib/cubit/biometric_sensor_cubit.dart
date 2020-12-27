@@ -25,6 +25,7 @@ part 'biometric_sensor_states.dart';
 
 abstract class BiometricCubit {
   void setSensorEnabled({@required BiometricSensorType sensor, @required bool enabled});
+  Future<void> sensorAuthenticate({@required BiometricSensorType usingSensor});
 }
 
 /// The [BLoC] layer of that responds to [events] and [emits state] through the [respository] interface
@@ -36,10 +37,7 @@ class BiometricSensorCubit extends Cubit<BiometricSensorState> implements Biomet
   final Duration _lockedOutDuration;
   final Duration _permLockoutDuration;
 
-  BiometricSensorCubit(
-      {@required this.biometricRespository,
-      @required Duration lockedOutDuration,
-      @required Duration permLockoutDuration})
+  BiometricSensorCubit({@required this.biometricRespository, @required Duration lockedOutDuration, @required Duration permLockoutDuration})
       : this._lockedOutDuration = lockedOutDuration,
         this._permLockoutDuration = permLockoutDuration,
         super(InitialState());
@@ -77,7 +75,7 @@ class BiometricSensorCubit extends Cubit<BiometricSensorState> implements Biomet
 
   /// The [usingSensor] parameter is [not used] as currently only one(1) biometric sensor is expected to
   /// exist on a device, but for [future proffing] when multiple sensors are an option, this parmeter is provided
-  void sensorAuthenticate({@required BiometricSensorType usingSensor}) async {
+  Future<void> sensorAuthenticate({@required BiometricSensorType usingSensor}) async {
     Duration lockoutDuration = await LockoutTime.duration();
     if (lockoutDuration != null) {
       if (lockoutDuration.isNegative) {
@@ -173,9 +171,7 @@ class BiometricSensorCubit extends Cubit<BiometricSensorState> implements Biomet
   void _reportLockout() async {
     Duration lockoutDuration = await LockoutTime.duration();
     _clearAuthenticationTime();
-    final lockoutReason = lockoutDuration.abs().inMilliseconds > _lockedOutDuration.inMilliseconds
-        ? BiometricException.permanentlyLockedOut
-        : BiometricException.lockedOut;
+    final lockoutReason = lockoutDuration.abs().inMilliseconds > _lockedOutDuration.inMilliseconds ? BiometricException.permanentlyLockedOut : BiometricException.lockedOut;
     emit(LockedoutState(lockoutReason, null));
   }
 }
