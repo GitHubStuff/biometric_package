@@ -2,7 +2,6 @@
 // Uses of this source code is governed by 'The Unlicense' that can be
 // found in the LICENSE file.
 
-import '../preferences/most_recent_authenication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/auth_strings.dart';
@@ -11,6 +10,7 @@ import 'package:local_auth/local_auth.dart';
 
 import '../exceptions/app_exceptions.dart';
 import '../exceptions/biometric_exception.dart';
+import '../preferences/most_recent_authenication.dart';
 import '../sensor_types/biometric_sensor.dart';
 import 'biometric_respository.dart';
 

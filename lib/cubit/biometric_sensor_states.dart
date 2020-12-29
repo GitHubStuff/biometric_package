@@ -11,10 +11,6 @@ class AuthenticatedState extends BiometricSensorState {
   List<Object> get props => [duration, biometricSensorState];
 }
 
-class BiometricallyAuthenticated extends BiometricSensorState {
-  const BiometricallyAuthenticated() : super(BiometricBuilderState.BiometricallyAuthenticated);
-}
-
 class AvailabilityState extends BiometricSensorState {
   final List<BiometricSensorType> listOfSensors;
   const AvailabilityState(this.listOfSensors) : super(BiometricBuilderState.AvailabilityState);
@@ -22,12 +18,8 @@ class AvailabilityState extends BiometricSensorState {
   List<Object> get props => [listOfSensors, biometricSensorState];
 }
 
-class LockedoutState extends BiometricSensorState {
-  final BiometricException exception;
-  final Duration duration;
-  const LockedoutState(this.exception, this.duration) : super(BiometricBuilderState.LockedoutState);
-  @override
-  List<Object> get props => [exception, duration, biometricSensorState];
+class BiometricallyAuthenticated extends BiometricSensorState {
+  const BiometricallyAuthenticated() : super(BiometricBuilderState.BiometricallyAuthenticated);
 }
 
 class CancelState extends BiometricSensorState {
@@ -54,6 +46,14 @@ class ExceptionState extends BiometricSensorState {
 
 class InitialState extends BiometricSensorState {
   const InitialState() : super(BiometricBuilderState.InitialState);
+}
+
+class LockedoutState extends BiometricSensorState {
+  final BiometricException exception;
+  final Duration duration;
+  const LockedoutState(this.exception, this.duration) : super(BiometricBuilderState.LockedoutState);
+  @override
+  List<Object> get props => [exception, duration, biometricSensorState];
 }
 
 class NoBiometricsState extends BiometricSensorState {

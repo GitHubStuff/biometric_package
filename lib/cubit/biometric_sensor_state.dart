@@ -10,10 +10,10 @@ enum BiometricBuilderState {
   BiometricallyAuthenticated,
   CancelState,
   EnableSensorState,
-  NoBiometricsState,
   ExceptionState,
   InitialState,
   LockedoutState,
+  NoBiometricsState,
   PlatformError,
   TimeoutState,
 }
