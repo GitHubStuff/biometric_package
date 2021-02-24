@@ -1,6 +1,6 @@
 name: biometric_package
 description: An package that applies BLoC for biometric authentication
-version: 0.0.3+3
+version: 0.0.3+4
 author: null
 
 environment:
